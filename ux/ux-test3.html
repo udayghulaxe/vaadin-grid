@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>UX Test 3</title>
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+
+  <link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
+  <link rel="import" href="x-data-provider.html">
+
+  <style>
+   html, body {
+     height: 100%;
+     margin: 0;
+     overflow: hidden;
+   }
+  </style>
+
+</head>
+
+<body unresolved>
+
+    <style is="custom-style">
+      vaadin-grid {
+        height: 100%;
+        font-family: verdana;
+        --vaadin-grid-header-cell: {
+          font-weight: bold;
+        };
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    </style>
+
+        <template is="dom-bind" id="bind">
+          <x-array-data-provider items="{{items}}"></x-array-data-provider>
+
+          <vaadin-grid aria-label="Column Grouping Example" items="[[items]]" column-reordering-allowed
+            >
+
+            <vaadin-grid-column width="50px" flex-grow="0">
+              <template class="header">
+                <div aria-label="Picture"></div>
+              </template>
+              <template>
+                <img alt="[[item.user.name.first]] [[item.user.name.last]]" src="[[item.user.picture.thumbnail]]"></img>
+              </template>
+            </vaadin-grid-column>
+
+
+            <vaadin-grid-column-group resizable>
+              <template class="header">Location</template>
+
+              <vaadin-grid-column width="30px"  flex-grow="0">
+                <template class="header">City</template>
+                <template>[[item.user.location.city]]</template>
+
+              </vaadin-grid-column>
+
+              <vaadin-grid-column  width="30px"  flex-grow="0">
+                <template class="header">State</template>
+                <template>[[item.user.location.state]]</template>
+              </vaadin-grid-column>
+
+              <vaadin-grid-column width="200px">
+                <template class="header">Street</template>
+                <template><p style="white-space: normal">[[item.user.location.street]]</p></template>
+              </vaadin-grid-column>
+            </vaadin-grid-column-group>
+
+            <vaadin-grid-column-group resizable>
+              <template class="header">Name</template>
+
+              <vaadin-grid-column width="20px" flex-grow="0">
+                <template class="header">First</template>
+                <template>[[item.user.name.first]]</template>
+              </vaadin-grid-column>
+              <vaadin-grid-column width="20px" flex-grow="0">
+                <template class="header">Gender</template>
+                <template>[[item.user.gender]]</template>
+              </vaadin-grid-column>
+
+              <vaadin-grid-column width="50px">
+                <template class="header">Last</template>
+                <template>[[item.user.name.last]]</template>
+              </vaadin-grid-column>
+
+            </vaadin-grid-column-group>
+
+
+          </vaadin-grid>
+        </template>
+
+        <script>
+        </script>
+</body>
+
+</html>

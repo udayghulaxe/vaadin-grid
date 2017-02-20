@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>UX Test 4</title>
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+
+  <link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
+  <link rel="import" href="bower_components/vaadin-grid/vaadin-grid-selection-column.html">
+
+  <link rel="import" href="x-data-provider.html">
+
+  <style>
+   html, body {
+     height: 100%;
+     margin: 0;
+   }
+  </style>
+
+</head>
+
+<body unresolved>
+
+<style is="custom-style">
+  vaadin-grid {
+    height: 100%;
+  }
+</style>
+
+<template is="dom-bind">
+  <x-array-data-provider-huge items="{{items}}"></x-array-data-provider-huge>
+
+  <vaadin-grid aria-label="Multi-Selection Example" items="[[items]]" selected-items={{selected}} size="[[5]]">
+    <vaadin-grid-column-group>
+      <vaadin-grid-selection-column auto-select>
+      </vaadin-grid-selection-column>
+
+      <vaadin-grid-column>
+        <template class="header">First Name</template>
+        <template>[[item.user.name.first]]</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">Last Name</template>
+        <template>[[item.user.name.last]]</template>
+      </vaadin-grid-column>
+
+    </vaadin-grid-column-group>
+
+  </vaadin-grid>
+</template>
+
+<script>
+</script>
+</body>
+
+</html>
