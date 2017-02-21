@@ -61,10 +61,10 @@
               <div class="details">
                 <img src="[[item.user.picture.large]]" class="user-picture">
                 <div class="user-details">
-                  <h5>Location</h5>
+                  <h5>[[location]]</h5>
                    <p>[[item.user.location.street]]
                    <p>[[item.user.location.city]], [[item.user.location.zip]] [[item.user.location.state]]
-                  <h5>Contact</h5>
+                  <h5>[[contact]]</h5>
                    <p>[[item.user.email]]
                    <p>[[item.user.phone]]
                 </div>
@@ -77,11 +77,11 @@
             </vaadin-grid-column>
 
             <vaadin-grid-column-group frozen>
-              <template class="header">Name</template>
+              <template class="header">[[name]]</template>
 
               <vaadin-grid-column width="calc(20% - 20px)" >
                 <template class="header">
-                  <vaadin-grid-sorter path="user.name.first">First
+                  <vaadin-grid-sorter path="user.name.first">[[first]]
                   </vaadin-grid-sorter>
                 </template>
                 <template>[[item.user.name.first]]</template>
@@ -89,7 +89,7 @@
 
               <vaadin-grid-column width="calc(20% - 20px)">
                 <template class="header">
-                  <vaadin-grid-sorter path="user.name.last">Last</vaadin-grid-sorter>
+                  <vaadin-grid-sorter path="user.name.last">[[last]]</vaadin-grid-sorter>
                 </template>
                 <template>[[item.user.name.last]]</template>
               </vaadin-grid-column>
@@ -97,12 +97,12 @@
 
 
             <vaadin-grid-column-group>
-              <template class="header">Location</template>
+              <template class="header">[[location]]</template>
 
               <vaadin-grid-column width="calc(25% - 20px)">
                 <template class="header">
                   <vaadin-grid-filter aria-label="City" path="user.location.city" value="[[_filter1]]">
-                    <input placeholder="City" value="{{_filter1::input}}" focus-target>
+                    <input placeholder="[[city]]" value="{{_filter1::input}}" focus-target>
                   </vaadin-grid-filter>
                 </template>
                 <template>[[item.user.location.city]]</template>
@@ -110,18 +110,18 @@
               </vaadin-grid-column>
 
               <vaadin-grid-column width="calc(25% - 20px)">
-                <template class="header">State</template>
+                <template class="header">[[state]]</template>
                 <template>[[item.user.location.state]]</template>
               </vaadin-grid-column>
 
               <vaadin-grid-column width="200px">
-                <template class="header">Street</template>
+                <template class="header">[[zip]]</template>
                 <template><p style="white-space: normal">[[item.user.location.zip]]</p></template>
               </vaadin-grid-column>
             </vaadin-grid-column-group>
 
             <vaadin-grid-column width="400px">
-              <template class="header"></template>
+              <template class="header">[[street]]</template>
               <template><p style="white-space: normal">[[item.user.location.street]]</p></template>
             </vaadin-grid-column>
 
@@ -130,6 +130,18 @@
 
         <script>
          var tpl = document.getElementById('bind');
+
+         var es = /=es/.test(window.location.search);
+         tpl.name = es ? 'Identidad' : 'Name';
+         tpl.first = es ? 'Nombre' : 'First';
+         tpl.last = es ? 'Apellido' : 'Last';
+         tpl.city = es ? 'Ciudad' : 'City';
+         tpl.location = es ? 'Direccion' : 'Location';
+         tpl.state = es ? 'Provincia' : 'State';
+         tpl.zip = es ? 'C.P' : 'Zip';
+         tpl.street = es ? 'Calle' : 'Street';
+         tpl.contact = es ? 'Contacto' : 'Contact';
+
          tpl._onActiveItem = function(e) {
            var grid = e.target;
            grid.expandedItems = [grid.activeItem];

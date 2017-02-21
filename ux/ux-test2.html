@@ -44,12 +44,12 @@
   }
 </style>
 
-<template is="dom-bind">
+<template is="dom-bind" id="bind">
   <x-array-data-provider items="{{items}}"></x-array-data-provider>
 
   <vaadin-grid aria-label="Multi-Selection Example" items="[[items]]" selected-items={{selected}} size="[[5]]">
     <vaadin-grid-column-group>
-      <template class="header"><h4>I am following: [[selected.length]] people</h4></template>
+      <template class="header"><h4>[[following]] [[selected.length]] [[people]]</h4></template>
       <vaadin-grid-selection-column auto-select>
       </vaadin-grid-selection-column>
 
@@ -64,12 +64,12 @@
 
 
       <vaadin-grid-column>
-        <template class="header">First Name</template>
+        <template class="header">[[first]]</template>
         <template>[[item.user.name.first]]</template>
       </vaadin-grid-column>
 
       <vaadin-grid-column>
-        <template class="header">Last Name</template>
+        <template class="header">[[last]]</template>
         <template>[[item.user.name.last]]</template>
       </vaadin-grid-column>
 
@@ -79,7 +79,22 @@
 </template>
 
 <script>
+  var tpl = document.getElementById('bind');
+
+  var es = /=es/.test(window.location.search);
+  tpl.following = es ? 'Seleccionadas: ' : 'Selected: ';
+  tpl.people = es ? ' Personas' : 'People';
+  tpl.name = es ? 'Identidad' : 'Name';
+  tpl.first = es ? 'Nombre' : 'First';
+  tpl.last = es ? 'Apellido' : 'Last';
+  tpl.city = es ? 'Ciudad' : 'City';
+  tpl.location = es ? 'Direccion' : 'Location';
+  tpl.state = es ? 'Provincia' : 'State';
+  tpl.zip = es ? 'C.P' : 'Zip';
+  tpl.street = es ? 'Calle' : 'Street';
+  tpl.contact = es ? 'Contacto' : 'contact';
 </script>
+
 </body>
 
 </html>

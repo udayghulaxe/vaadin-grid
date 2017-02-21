@@ -34,7 +34,7 @@
   }
 </style>
 
-<template is="dom-bind">
+<template is="dom-bind" id="bind">
   <x-array-data-provider-huge items="{{items}}"></x-array-data-provider-huge>
 
   <vaadin-grid aria-label="Multi-Selection Example" items="[[items]]" selected-items={{selected}} size="[[5]]">
@@ -58,6 +58,23 @@
 </template>
 
 <script>
+  var tpl = document.getElementById('bind');
+
+  var es = /=es/.test(window.location.search);
+  tpl.name = es ? 'Identidad' : 'Name';
+  tpl.first = es ? 'Nombre' : 'First';
+  tpl.last = es ? 'Apellido' : 'Last';
+  tpl.city = es ? 'Ciudad' : 'City';
+  tpl.location = es ? 'Direccion' : 'Location';
+  tpl.state = es ? 'Provincia' : 'State';
+  tpl.zip = es ? 'C.P' : 'Zip';
+  tpl.street = es ? 'Calle' : 'Street';
+  tpl.contact = es ? 'Contacto' : 'Contact';
+
+  tpl._onActiveItem = function(e) {
+    var grid = e.target;
+    grid.expandedItems = [grid.activeItem];
+  }
 </script>
 </body>
 

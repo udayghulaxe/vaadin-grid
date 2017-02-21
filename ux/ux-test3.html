@@ -59,39 +59,39 @@
 
 
             <vaadin-grid-column-group resizable>
-              <template class="header">Location</template>
+              <template class="header">[[location]]</template>
 
               <vaadin-grid-column width="30px"  flex-grow="0">
-                <template class="header">City</template>
+                <template class="header">[[city]]</template>
                 <template>[[item.user.location.city]]</template>
 
               </vaadin-grid-column>
 
               <vaadin-grid-column  width="30px"  flex-grow="0">
-                <template class="header">State</template>
+                <template class="header">[[state]]</template>
                 <template>[[item.user.location.state]]</template>
               </vaadin-grid-column>
 
               <vaadin-grid-column width="200px">
-                <template class="header">Street</template>
+                <template class="header">[[street]]</template>
                 <template><p style="white-space: normal">[[item.user.location.street]]</p></template>
               </vaadin-grid-column>
             </vaadin-grid-column-group>
 
             <vaadin-grid-column-group resizable>
-              <template class="header">Name</template>
+              <template class="header">[[name]]</template>
 
               <vaadin-grid-column width="20px" flex-grow="0">
-                <template class="header">First</template>
+                <template class="header">[[first]]</template>
                 <template>[[item.user.name.first]]</template>
               </vaadin-grid-column>
               <vaadin-grid-column width="20px" flex-grow="0">
-                <template class="header">Gender</template>
+                <template class="header">[[gender]]</template>
                 <template>[[item.user.gender]]</template>
               </vaadin-grid-column>
 
               <vaadin-grid-column width="50px">
-                <template class="header">Last</template>
+                <template class="header">[[last]]</template>
                 <template>[[item.user.name.last]]</template>
               </vaadin-grid-column>
 
@@ -102,6 +102,21 @@
         </template>
 
         <script>
+          var tpl = document.getElementById('bind');
+
+          var es = /=es/.test(window.location.search);
+          tpl.following = es ? 'Seleccionadas: ' : 'Selected: ';
+          tpl.people = es ? ' Personas' : 'People';
+          tpl.name = es ? 'Identidad' : 'Name';
+          tpl.first = es ? 'Nombre' : 'First';
+          tpl.last = es ? 'Apellido' : 'Last';
+          tpl.city = es ? 'Ciudad' : 'City';
+          tpl.location = es ? 'Direccion' : 'Location';
+          tpl.state = es ? 'Provincia' : 'State';
+          tpl.zip = es ? 'C.P' : 'Zip';
+          tpl.street = es ? 'Calle' : 'Street';
+          tpl.contact = es ? 'Contacto' : 'Contact';
+          tpl.gender = es ? 'Sexo' : 'Gender';
         </script>
 </body>
 
