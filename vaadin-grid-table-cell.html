@@ -228,20 +228,10 @@
         var id = 'vaadin-grid-cell-content-' + contentId;
 
         Polymer.dom(this._cellContent).appendChild(this.instance.root);
+        this._cellContent.setAttribute('slot', id);
 
-        // Polymer 2.0
-        if (Polymer.Element) {
-          this._cellContent.setAttribute('slot', id);
-
-          this._insertionPoint = document.createElement('slot');
-          this._insertionPoint.setAttribute('name', id);
-
-        } else {
-          this._cellContent.setAttribute('id', id);
-
-          this._insertionPoint = document.createElement('content');
-          this._insertionPoint.setAttribute('select', '#' + id);
-        }
+        this._insertionPoint = document.createElement('slot');
+        this._insertionPoint.setAttribute('name', id);
       },
     };
 
