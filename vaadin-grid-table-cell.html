@@ -228,21 +228,11 @@
         var id = 'vaadin-grid-cell-content-' + contentId;
 
         Polymer.dom(this._cellContent).appendChild(this.instance.root);
-
-        // `aria-labelledby` a11y attribute in the focus trap needs cell IDs
-        // to announce the cell contents in both Polymer versions.
+        this._cellContent.setAttribute('slot', id);
         this._cellContent.setAttribute('id', id);
 
-        // Polymer 2.0
-        if (Polymer.Element) {
-          this._cellContent.setAttribute('slot', id);
-
-          this._insertionPoint = document.createElement('slot');
-          this._insertionPoint.setAttribute('name', id);
-        } else {
-          this._insertionPoint = document.createElement('content');
-          this._insertionPoint.setAttribute('select', '#' + id);
-        }
+        this._insertionPoint = document.createElement('slot');
+        this._insertionPoint.setAttribute('name', id);
       },
     };
 
